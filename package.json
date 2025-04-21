@@ -1,0 +1,19 @@
+{
+  "name": "webspin",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "install:frontend": "cd frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && node src/index.js & cd frontend && npx vite preview --host 0.0.0.0 --port 3000"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+} 
