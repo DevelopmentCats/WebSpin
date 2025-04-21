@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs", "yarn"]
+nixPkgs = ["nodejs", "npm"]
 
 [phases.install]
 cmds = [
@@ -13,8 +13,10 @@ cmds = [
 ]
 
 [start]
-cmd = "cd backend && npm start"
+# Start both frontend and backend
+cmd = "cd backend && node src/index.js & cd frontend && npx vite preview --host 0.0.0.0 --port 3000"
 
 [env]
 PORT = "5000"
 NODE_ENV = "production"
+VITE_API_URL = "/api"

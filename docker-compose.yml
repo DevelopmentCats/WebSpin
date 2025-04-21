@@ -5,14 +5,17 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-http://backend:5000}
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
       - /app/node_modules
     environment:
-      - NODE_ENV=development
-      - VITE_API_URL=http://backend:5000
+      - NODE_ENV=${NODE_ENV:-development}
+      - VITE_API_URL=${VITE_API_URL:-http://backend:5000}
     depends_on:
       - backend
 
@@ -23,8 +26,8 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app
+      - ./backend/src:/app/src
       - /app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV:-development}
       - PORT=5000
